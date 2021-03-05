@@ -1,0 +1,42 @@
+** 5 Mar 2021
+
+[[file:user_preference.R]] reads data and does some simple consistency checks.
+
+1. It may be useful to have the choice=NONE data as well, can you
+   please add those rows?
+
+2. To learn nonlinear ranking models we need features for each
+   sentence, but the curent data only has difference features, right?
+   Can you please provide the sentence specific features for each
+   pair?
+
+Just to make sure I am interpreting the file correctly, these are the 36 difference feature column names right?
+#+begin_src R
+> grep("choice|data|social|PID|construct|G", names(user_pref), value=TRUE, invert=TRUE)
+ [1] "private_vb"      "that_del"        "contract"        "vb_present"
+ [5] "pro_2"           "pro_1"           "sub_conj_caus"   "disc_particle"
+ [9] "pro_nom"         "coord_conj_cls"  "prep_final"      "nn_all"
+[13] "prep"            "jj_attr"         "tt_ratio"        "word_length"
+[17] "pro_3"           "wh_rel_subj"     "nn_nom"          "adv_time"
+[21] "mod_pred"        "vb_suasive"      "sub_conj_cond"   "conj_advl"
+[25] "emphatic"        "pro_it"          "amplifr"         "wh_ques"
+[29] "vb_past"         "coord_conj_phrs" "adv"             "infinitive"
+[33] "mod_necess"      "split_aux"       "passive_short"   "jj_pred"
+#+end_src
+So to learn nonlinear models I would need a new data table with 36
+columns for original features, and 36 columns for modified
+features. For easy interpretation can you please prefix these column
+names with original_ and modified_ for example original_private_vb and
+modified_private_vb etc?
+
+3. I don't really understand the likert score columns (social*) -- is
+   this related to the output (choice column) somehow? can you please
+   explain?
+
+4. so the missing PID values mean that there are fewer participants in
+   Frames (145) than in DailyDialog (178) right? (I see PID1 to PID178
+   columns but some with missing values)
+
+5. is there a column which has an ID number for each sentence pair?
+   that may be useful for cross-validation (train on some sentences,
+   see if the model can predict well on new sentences)
