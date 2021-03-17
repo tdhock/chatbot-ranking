@@ -1,3 +1,37 @@
+** 16 Mar 2021
+
+[[file:raw.R]] reads data from raw files in
+https://github.com/chavesana/chatbots-register/tree/master/Text%20modification/R%20package/surveystats/data-raw
+and we see that 
+
+#+begin_src R
+> ux.tall[, .(count=.N), by=value]
+        value count
+1: TRANSLATED  1572
+2:   ORIGINAL  3146
+3:       NONE    77
+#+end_src
+
+There are file IDs in column names, but they do not correspond to the
+file IDs in counts_diff.csv, why?
+
+#+begin_src R
+> ux[1:5, 1:5]
+   PID PI_S1_R3_20_5_A PI_S1_R3_I31_7_A PI_S1_R3_14_1_A PI_S1_R2_6_1_E
+1:   1                                                                
+2:   2      TRANSLATED                                      TRANSLATED
+3:   3                                                                
+4:   4                                                        ORIGINAL
+5:   5                                                                
+> counts_diff[1:5, 1:5]
+        file private_vb that_del contract vb_present
+1: R2_10_E_1      -41.7    -20.8    -20.8      -29.8
+2: R2_13_J_1       27.0      0.0    -35.7       28.0
+3: R2_14_J_1      -23.8      0.0    -47.6      -14.8
+4: R2_20_J_1        0.0      0.0     -4.6       20.6
+5: R2_21_J_3        0.0      0.0    -41.7      -62.5
+#+end_src
+
 ** 5 Mar 2021
 
 [[file:user_preference.R]] reads data and does some simple consistency checks.
@@ -33,10 +67,26 @@ modified_private_vb etc?
    this related to the output (choice column) somehow? can you please
    explain?
 
+It is not related to the choice. These are questions that the user
+answered about themselves and how they feel about chatbots (e.g., I
+like having small talk with chatbots). In our experiment, these
+personal effects were not relevant for the outcome.
+
 4. so the missing PID values mean that there are fewer participants in
    Frames (145) than in DailyDialog (178) right? (I see PID1 to PID178
    columns but some with missing values)
 
+Yes, the missing values means that Frames had less participants than
+DailyDialog. Data were collected in two different points in time for
+each of these two corpora.
+
 5. is there a column which has an ID number for each sentence pair?
    that may be useful for cross-validation (train on some sentences,
    see if the model can predict well on new sentences)
+
+I do have the id for individual sentences, I guess I removed them when
+building this data as well. I'll add them back for the new dataset
+that I'll share with you soon (maybe over the weekend, my classes are
+killing me!!)
+
+
