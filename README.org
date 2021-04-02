@@ -1,3 +1,15 @@
+** 2 Apr 2021
+
+
+
+[[file:2021-04-02-read-data.R]] reads three new data files from Ana:
+
+[[file:user_preference.csv]]
+
+[[file:frames_counts.csv]]
+
+[[file:DD_counts.csv]]
+
 ** 16 Mar 2021
 
 [[file:raw.R]] reads data from raw files in
