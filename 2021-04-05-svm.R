@@ -117,6 +117,7 @@ bt.fit <- BradleyTerry2::BTm(
 out.name.vec <- c(or="Xip", tr="Xi")
 y.to.int <- c(ORIGINAL=1, NONE=0, TRANSLATED=-1)
 pairs.list <- list(yi=y.to.int[train.data.list$contests$choice])
+train.terms <- all.terms
 for(version in names(out.name.vec)){
   q.vec <- train.data.list$contests[[paste0(version, ".question")]]
   out.name <- out.name.vec[[version]]
@@ -133,6 +134,12 @@ sub.pairs <- function(i, plist){
     yi=yi[i]))
 }
 set.pairs.list <- lapply(set.is.list, sub.pairs, pairs.list)
+
+gfit <- with(set.pairs.list$subtrain, glmnet::cv.glmnet(
+  Xi-Xip, ifelse(yi>0, 1, 0)))
+w <- as.matrix(coef(gfit))
+w[w!=0,]
+
 svm.data.list <- lapply(set.pairs.list, rankSVMcompare::pairs2svmData)
 lab.tab <- table(svm.data.list$subtrain$yi)
 class.weights <- 1/lab.tab
