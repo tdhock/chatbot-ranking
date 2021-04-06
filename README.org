@@ -1,6 +1,12 @@
+** 5 Apr 2021
+
+[[file:2021-04-05-read-data.R]] converts CSV data to [[file:2021-04-05-read-data.rds]]
+
+[[file:2021-04-05-svm.R]] makes 
+
+[[file:2021-04-05-svm-BT-terms-loss.png]]
+
 ** 2 Apr 2021
-
-
 
 [[file:2021-04-02-read-data.R]] reads three new data files from Ana:
 
