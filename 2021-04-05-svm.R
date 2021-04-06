@@ -94,7 +94,6 @@ ggplot()+
   geom_line(aes(
     n.terms, 100*n.correct/n.labels, color=set.name),
     data=size.acc.dt)
-
 gg <- ggplot()+
   geom_line(aes(
     n.terms, mean.log.loss),
